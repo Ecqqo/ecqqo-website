@@ -182,7 +182,7 @@ export const translations = {
       company: "Company",
       privacy: "Privacy Policy",
       terms: "Terms of Service",
-      copyright: "2026 Ecqqo. All rights reserved.",
+      copyright: "2026 Ecqqo LLC. All rights reserved.",
       whatsappCta: "Chat with us on WhatsApp",
     },
   },
