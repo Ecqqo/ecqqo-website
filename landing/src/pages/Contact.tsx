@@ -56,6 +56,10 @@ export function Contact() {
               </select>
             </label>
             <label>
+              {t.contact.subject}
+              <input id="contact-title" name="title" required maxLength={150} />
+            </label>
+            <label>
               {t.contact.message}
               <textarea id="contact-message" name="message" required maxLength={5000} rows={6} />
             </label>
