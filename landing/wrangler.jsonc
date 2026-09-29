@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ecqqo-website",
+  "compatibility_date": "2026-09-17",
+  "routes": [
+    { "pattern": "ecqqo.com", "custom_domain": true },
+    { "pattern": "www.ecqqo.com", "custom_domain": true }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}

@@ -1,39 +1,42 @@
 # Ecqqo
 
-> WhatsApp-native executive assistant for high-net-worth operators, founders, and family-office teams.
+> Ecqqo is an AI executive assistant that lives in WhatsApp. It works across Gmail, Google Calendar and Outlook (mail and calendar).
 
-Ecqqo automates executive assistant workflows directly inside WhatsApp. No extra apps, no handoffs, no follow-up leaks.
+## What Ecqqo does
 
-## What Ecqqo Does
+- Answers questions about your inbox, calendar and messages ("What needs me today?").
+- Books meetings: finds free slots and sends invites.
+- Drafts and sends emails when you ask.
+- Understands voice notes and photos.
+- Sends reminders at the time you ask, in your time zone.
+- Urgent-message alerts: watches your WhatsApp conversations and pings you only when something important comes in, with adjustable sensitivity.
+- Daily or weekly PDF briefings with decisions, risks and follow-ups.
+- Settings, bug reports and feedback by message.
 
-- Scheduling: "Book a meeting with Ahmad tomorrow at 3pm" — Ecqqo checks calendars, proposes slots, sends invites.
-- Calendar management: Morning briefings, conflict detection, timezone handling.
-- Email digests: Summarizes unread emails, drafts replies, flags urgent items.
-- Reminders: Smart follow-ups, deadline tracking, recurring tasks.
-- Travel coordination: Flight lookups, hotel bookings, itinerary assembly.
-- Daily briefs: Consolidated morning summary of calendar, email, and tasks.
+Ecqqo does not auto-reply to your contacts. It alerts you and acts when you ask.
 
-## How It Works
+## Getting started
 
-1. Capture: You send a natural-language message via WhatsApp.
-2. Propose: Ecqqo interprets intent, checks integrations, and proposes a structured action plan.
-3. Execute: Upon approval, Ecqqo executes — books meetings, sends emails, sets reminders.
+1. Message Ecqqo on WhatsApp at +1 281-944-5450: https://wa.me/12819445450?text=Hi%20Ecqqo
+2. Ecqqo replies with a secure setup link.
+3. Pick a plan, connect your WhatsApp, email and calendar, and set preferences.
 
-## Pricing
+There is no free trial.
 
-- Founder plan: $199/mo (749 AED/mo)
-- Dreamer plan: $399/mo (1,499 AED/mo)
-- Custom/Enterprise: Contact for pricing
-- 30% discount on annual billing
+## Pricing (USD, monthly)
+
+- Solo, $20/month: all features, 1 connected email & calendar account, $4 of assistant usage included monthly.
+- Delegate, $100/month: everything in Solo, plus delegating tasks to your human assistant (with their own workspace), a web command center with full history and activity, custom standing instructions for reports, alerts and chat style, 10 connected email & calendar accounts, and $20 of assistant usage included monthly.
+
+Usage beyond the included credit is billed at cost on the next invoice. An optional usage limit can be turned on in settings. Cancel anytime from the billing portal.
 
 ## Links
 
 - Website: https://ecqqo.com/
 - Privacy Policy: https://ecqqo.com/privacy
 - Terms of Service: https://ecqqo.com/terms
+- Data Deletion: https://ecqqo.com/data-deletion
 
 ## Contact
 
-- General: hello@ecqqo.com
-- Privacy: privacy@ecqqo.com
-- Legal: legal@ecqqo.com
+- Ecqqo LLC: https://ecqqo.com/contact

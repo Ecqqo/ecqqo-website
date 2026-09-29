@@ -3,72 +3,72 @@ import { Layout } from "../components/Layout";
 export function Privacy() {
   return (
     <Layout>
-      <main className="legal-page">
+      <main className="legal-page container" dir="ltr" lang="en">
         <h1>Privacy Policy</h1>
-        <p className="legal-updated">Last updated: March 6, 2026</p>
+        <p className="legal-updated">Effective September 28, 2026</p>
 
         <section>
-          <h2>1. Introduction</h2>
-          <p>Ecqqo ("we", "us", "our") operates the website ecqqo.com and provides a WhatsApp-native executive assistant service. This Privacy Policy explains how we collect, use, and protect your personal information.</p>
+          <h2>1. Who We Are</h2>
+          <p>Ecqqo LLC ("Ecqqo," "we," "us," or "our") is a United States company that operates ecqqo.com and app.ecqqo.com and provides Ecqqo, an AI executive assistant service that works in WhatsApp.</p>
         </section>
 
         <section>
           <h2>2. Information We Collect</h2>
-          <h3>Information you provide</h3>
           <ul>
-            <li><strong>Email address</strong> — when you join our waitlist</li>
-            <li><strong>WhatsApp messages</strong> — when you use our service (after launch)</li>
-            <li><strong>Calendar and email data</strong> — only with your explicit authorization, to perform scheduling and digest tasks</li>
-          </ul>
-          <h3>Information collected automatically</h3>
-          <ul>
-            <li>Basic analytics data (page views, device type, browser)</li>
-            <li>IP address (for rate limiting and security)</li>
+            <li><strong>Account and contact information:</strong> your name, email address, phone number, company, and preferences.</li>
+            <li><strong>WhatsApp data:</strong> your WhatsApp Business account identifiers, phone numbers, profile information, message content, attachments, contacts, message metadata, and delivery status when you connect WhatsApp or communicate through the service.</li>
+            <li><strong>Connected-service data:</strong> calendar, email, contact, and related information you authorize us to access.</li>
+            <li><strong>Billing information:</strong> your plan, subscription status, and usage. Payment card details are collected and processed by Stripe.</li>
+            <li><strong>Technical information:</strong> IP address, browser and device information, logs, and security events.</li>
           </ul>
         </section>
 
         <section>
-          <h2>3. How We Use Your Information</h2>
+          <h2>3. How We Use Information</h2>
           <ul>
-            <li>To manage your waitlist position and send verification emails</li>
-            <li>To provide and improve our executive assistant service</li>
-            <li>To communicate product updates and launch notifications</li>
-            <li>To prevent abuse and ensure platform security</li>
+            <li>Provide requested assistant features, including scheduling, reminders, summaries, urgent-message alerts, reports, and communications.</li>
+            <li>Connect and administer WhatsApp Business accounts through Meta's Cloud API.</li>
+            <li>Authenticate users, maintain security, prevent abuse, and troubleshoot the service.</li>
+            <li>Process subscriptions and payments, and communicate with you about Ecqqo.</li>
+            <li>Comply with law and enforce our agreements.</li>
           </ul>
+          <p>We do not sell personal information. We do not use WhatsApp message content for advertising.</p>
         </section>
 
         <section>
-          <h2>4. Data Sharing</h2>
-          <p>We do not sell your personal information. We may share data with:</p>
-          <ul>
-            <li><strong>Service providers</strong> — email delivery (Resend), hosting (Vercel), database (Convex), and WhatsApp (Meta Cloud API)</li>
-            <li><strong>Legal obligations</strong> — if required by law or to protect our rights</li>
-          </ul>
+          <h2>4. How We Share Information</h2>
+          <p>We disclose information only as needed to operate the service, at your direction, or when required by law. Recipients may include Meta and WhatsApp, cloud infrastructure providers, connected calendar and email providers, professional advisers, and authorities with a valid legal basis. Providers may process information only to perform services for us under their applicable agreements.</p>
+          <p>Our service providers fall into these categories: cloud hosting and database providers, payment processors, messaging platforms, services that connect your email and calendar accounts, and artificial intelligence providers that process content to generate replies, summaries, transcriptions, and alerts.</p>        </section>
+
+        <section>
+          <h2>5. Meta Platform Data</h2>
+          <p>Information received from Meta products is handled in accordance with Meta's applicable platform terms and developer policies. We request only the permissions needed to onboard and support a customer's WhatsApp Business account and to send or receive messages at that customer's direction.</p>
         </section>
 
         <section>
-          <h2>5. Data Security</h2>
-          <p>We use industry-standard security measures including encryption in transit (TLS), secure database storage, and access controls. No system is 100% secure, but we take reasonable steps to protect your data.</p>
+          <h2>6. Data Retention and Deletion</h2>
+          <p>We retain information only while needed to provide the service, meet legal obligations, resolve disputes, and maintain security. When an account is disconnected or a valid deletion request is completed, we delete or de-identify associated personal information unless retention is legally required. Backup copies may remain for a limited period before automatic deletion.</p>
+          <p>You can request deletion by following our <a href="/data-deletion">data deletion instructions</a> or through our <a href="/contact?category=data-deletion">contact form</a>.</p>
         </section>
 
         <section>
-          <h2>6. Data Retention</h2>
-          <p>We retain your information for as long as your account is active or as needed to provide our services. Waitlist data is retained until launch or until you request deletion.</p>
+          <h2>7. Security and International Processing</h2>
+          <p>We use reasonable administrative, technical, and organizational safeguards, including encryption in transit and access controls. Information may be processed in the United States and other countries where our providers operate, subject to applicable safeguards.</p>
         </section>
 
         <section>
-          <h2>7. Your Rights</h2>
-          <p>You may request to access, correct, or delete your personal information at any time by contacting us at <a href="mailto:privacy@ecqqo.com">privacy@ecqqo.com</a>.</p>
+          <h2>8. Your Choices and Rights</h2>
+          <p>Depending on where you live, you may have rights to access, correct, delete, or obtain a copy of personal information, or to object to or restrict certain processing. You may revoke a connected service in its settings and contact us to exercise your rights. We may need to verify your identity before fulfilling a request.</p>
         </section>
 
         <section>
-          <h2>8. Changes</h2>
-          <p>We may update this policy from time to time. We will notify you of significant changes via email or through our website.</p>
+          <h2>9. Children</h2>
+          <p>Ecqqo is a business service and is not directed to children under 18. We do not knowingly collect personal information from children.</p>
         </section>
 
         <section>
-          <h2>9. Contact</h2>
-          <p>For questions about this Privacy Policy, contact us at <a href="mailto:privacy@ecqqo.com">privacy@ecqqo.com</a>.</p>
+          <h2>10. Changes and Contact</h2>
+          <p>We may update this policy and will post the revised effective date here. For privacy questions or requests, contact Ecqqo LLC through our <a href="/contact">contact form</a>.</p>
         </section>
       </main>
     </Layout>

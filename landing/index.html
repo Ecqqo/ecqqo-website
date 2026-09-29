@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ecqqo | Empower your Human Assistant</title>
-    <meta name="description" content="Ecqqo is a WhatsApp-native executive assistant for high-net-worth operators. Replace EA/VA workflows with automated scheduling and approvals." />
-    <meta name="keywords" content="WhatsApp executive assistant, replace virtual assistant, executive assistant automation, HNWI productivity" />
+    <title>Ecqqo | Your AI executive assistant in WhatsApp</title>
+    <meta name="description" content="Ecqqo is an AI executive assistant that lives in WhatsApp. It alerts you to urgent messages, books meetings, drafts email, sets reminders and sends briefings across Gmail, Google Calendar and Outlook." />
     <meta name="robots" content="index,follow,max-image-preview:large" />
-    <meta name="theme-color" content="#faf7f0" />
+    <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14110e" media="(prefers-color-scheme: dark)" />
     <meta property="og:site_name" content="Ecqqo" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Ecqqo | Empower your Human Assistant" />
-    <meta property="og:description" content="From WhatsApp chat to confirmed calendar actions. Built for principals, founders, and family-office teams." />
+    <meta property="og:title" content="Ecqqo | Never ghost an important conversation again" />
+    <meta property="og:description" content="Your AI executive assistant in WhatsApp. Urgent-message alerts, meetings, email, reminders and briefings from one chat." />
     <meta property="og:url" content="https://ecqqo.com/" />
     <meta property="og:image" content="https://ecqqo.com/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Ecqqo | Empower" />
-    <meta name="twitter:description" content="Global cost-efficient executive assistant automation, directly inside WhatsApp." />
+    <meta name="twitter:title" content="Ecqqo | Never ghost an important conversation again" />
+    <meta name="twitter:description" content="Your AI executive assistant in WhatsApp." />
     <meta name="twitter:image" content="https://ecqqo.com/og-image.png" />
     <link rel="canonical" href="https://ecqqo.com/" />
     <link rel="icon" type="image/x-icon" href="/favicons/favicon.ico" />
@@ -25,9 +25,17 @@
     <link rel="manifest" href="/favicons/manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" />
     <script>
-      (function(){var t=localStorage.getItem('theme')||'device';var d=t==='device'?(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'):t;document.documentElement.setAttribute('data-theme',d)})()
+      try {
+        var theme = localStorage.getItem("theme");
+        if (theme !== "light" && theme !== "dark") theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = theme;
+        if (localStorage.getItem("ecqqo-locale") === "ar") {
+          document.documentElement.lang = "ar";
+          document.documentElement.dir = "rtl";
+        }
+      } catch {}
     </script>
   </head>
   <body>

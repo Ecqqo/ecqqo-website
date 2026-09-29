@@ -1,29 +1,30 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
-import { translations, type Locale, type TranslationKeys } from "./translations";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { translations, type Locale, type Translation } from "./translations";
+
+const storageKey = "ecqqo-locale";
 
 interface LocaleContextValue {
   locale: Locale;
-  setLocale: (l: Locale) => void;
-  t: TranslationKeys;
-  dir: "ltr" | "rtl";
+  setLocale: (locale: Locale) => void;
+  t: Translation;
 }
 
 const LocaleContext = createContext<LocaleContextValue>({
   locale: "en",
   setLocale: () => {},
   t: translations.en,
-  dir: "ltr",
 });
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
+function storedLocale(): Locale {
+  try {
+    const saved = localStorage.getItem(storageKey);
+    if (saved === "en" || saved === "ar") return saved;
+  } catch {}
+  return "en";
+}
 
-  useEffect(() => {
-    const saved = localStorage.getItem("ecqqo-locale") as Locale | null;
-    if (saved && saved in translations) {
-      setLocaleState(saved);
-    }
-  }, []);
+export function LocaleProvider({ children }: { children: ReactNode }) {
+  const [locale, setLocaleState] = useState(storedLocale);
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -31,19 +32,14 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     document.title = translations[locale].pageTitle;
   }, [locale]);
 
-  function setLocale(l: Locale) {
-    setLocaleState(l);
-    localStorage.setItem("ecqqo-locale", l);
+  function setLocale(next: Locale) {
+    setLocaleState(next);
+    try {
+      localStorage.setItem(storageKey, next);
+    } catch {}
   }
 
-  const value: LocaleContextValue = {
-    locale,
-    setLocale,
-    t: translations[locale],
-    dir: locale === "ar" ? "rtl" : "ltr",
-  };
-
-  return <LocaleContext value={value}>{children}</LocaleContext>;
+  return <LocaleContext value={{ locale, setLocale, t: translations[locale] }}>{children}</LocaleContext>;
 }
 
 export function useLocale() {

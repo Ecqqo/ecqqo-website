@@ -1,11 +1,11 @@
 {
   "name": "Ecqqo",
   "short_name": "Ecqqo",
-  "description": "WhatsApp-native executive assistant",
+  "description": "Your AI executive assistant in WhatsApp",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#faf7f0",
-  "theme_color": "#faf7f0",
+  "background_color": "#faf7f2",
+  "theme_color": "#faf7f2",
   "icons": [
     {
       "src": "/favicons/android-icon-36x36.png",

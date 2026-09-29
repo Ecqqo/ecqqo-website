@@ -1,51 +1,13 @@
 {
-  "name": "ecqqo",
-  "version": "0.2.0",
+  "name": "ecqqo-website",
+  "version": "1.0.0",
   "private": true,
-  "type": "module",
   "workspaces": [
-    "landing",
-    "services/*",
-    "shared"
+    "landing"
   ],
   "scripts": {
-    "dev": "vite dev",
-    "dev:backend": "convex dev",
-    "dev:connector": "bun run --filter @ecqqo/connector dev",
-    "build": "vite build",
-    "start": "node .output/server/index.mjs",
-    "dev:landing": "bun run --filter @ecqqo/landing dev",
-    "build:landing": "bun run --filter @ecqqo/landing build",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
-  },
-  "dependencies": {
-    "@ai-sdk/anthropic": "^3.0.63",
-    "@ai-sdk/openai": "^3.0.47",
-    "@clerk/tanstack-react-start": "^1.0.1",
-    "@convex-dev/rate-limiter": "^0.3.2",
-    "@convex-dev/react-query": "^0.1.0",
-    "@convex-dev/resend": "^0.2.3",
-    "@tanstack/react-query": "^5.90.21",
-    "@tanstack/react-router": "^1.166.2",
-    "@tanstack/react-router-with-query": "^1.130.17",
-    "@tanstack/react-start": "^1.166.2",
-    "ai": "^6.0.134",
-    "convex": "^1.32.0",
-    "nitro": "^3.0.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "stripe": "^20.4.1"
-  },
-  "devDependencies": {
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "mermaid": "^11.12.3",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1",
-    "vite-tsconfig-paths": "^6.1.1",
-    "vitepress": "^1.6.4",
-    "vitepress-plugin-mermaid": "^2.0.17"
+    "dev": "bun run --cwd landing dev",
+    "check": "bun run --cwd landing check",
+    "build": "bun run --cwd landing build"
   }
 }
