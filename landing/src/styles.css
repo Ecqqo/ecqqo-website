@@ -105,17 +105,10 @@ h2 {
 }
 
 h1 {
-  display: grid;
-  gap: 0.1em;
-  font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
   font-weight: 700;
   line-height: 1.04;
   text-wrap: balance;
-}
-
-h1 span:nth-child(2) {
-  margin-block: 0.12em;
-  color: var(--accent-text);
 }
 
 h2 {
@@ -365,9 +358,40 @@ h3 {
   padding-block: 4.5rem 4rem;
 }
 
+.hero-bubble {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1.5rem 1.75rem 0.9rem;
+  border-radius: 28px;
+  border-start-start-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.hero-ticks {
+  justify-self: end;
+  color: #53bdeb;
+}
+
+.hero-ticks svg {
+  width: 26px;
+  height: 26px;
+}
+
+.hero-offer {
+  color: var(--sub);
+  font-size: 1.12rem;
+  line-height: 1.6;
+}
+
+.hero-offer strong {
+  color: var(--ink);
+  background: linear-gradient(transparent 58%, color-mix(in srgb, var(--accent) 24%, transparent) 58%);
+}
+
 .hero-copy {
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
   justify-items: start;
 }
 
@@ -1677,64 +1701,91 @@ h3 {
   font-variant-numeric: tabular-nums;
 }
 
-/* Modes */
+/* Two jobs */
 
-.modes {
+.jobs {
   display: grid;
-  justify-items: center;
-  gap: 1.25rem;
-  max-width: 720px;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 2rem;
+  align-items: start;
+  max-width: 1040px;
   margin-inline: auto;
 }
 
-.modes-tabs button {
-  padding: 0.6rem 1.2rem;
-  font-size: 0.95rem;
-  white-space: nowrap;
-}
-
-.modes-panel {
+.jobs-list {
   display: grid;
   gap: 1.25rem;
-  width: 100%;
+}
+
+.jobs-group {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.jobs-label {
+  margin-bottom: 0.25rem;
+  color: var(--accent-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.jobs-label.work {
+  color: var(--teal);
+}
+
+.jobs-list button {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.jobs-list button:hover {
+  background: var(--surface);
+}
+
+.jobs-list button strong {
+  font-size: 1rem;
+}
+
+.jobs-list button span {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.jobs-list button.active {
+  border-color: var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.jobs-list button.active strong {
+  color: var(--accent-text);
+}
+
+.jobs-demo {
+  position: sticky;
+  top: 6rem;
+  display: grid;
+  gap: 1rem;
   animation: pop 0.3s ease-out both;
 }
 
-.modes-panel > p {
+.jobs-demo > p {
+  display: none;
   color: var(--sub);
-  font-size: 1.05rem;
   line-height: 1.6;
   text-align: center;
-}
-
-.feature-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.feature-tabs button {
-  padding: 0.45rem 0.9rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--ink-2);
-  font: inherit;
-  font-size: 0.86rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
-}
-
-.feature-tabs button:hover {
-  border-color: var(--ink-2);
-}
-
-.feature-tabs button.active {
-  border-color: var(--accent);
-  background: var(--accent-soft);
-  color: var(--accent-text);
 }
 
 .chat-demo {
@@ -1796,14 +1847,9 @@ h3 {
   opacity: 0.55;
 }
 
-.briefing-demo {
-  position: relative;
-  width: 100%;
-  padding-bottom: 2.5rem;
-}
-
 .briefing-page {
   display: grid;
+  width: 100%;
   gap: 1rem;
   max-width: 440px;
   margin-inline: auto;
@@ -1812,7 +1858,6 @@ h3 {
   border-radius: 6px;
   background: var(--surface);
   box-shadow: var(--shadow);
-  transform: rotate(-1.5deg);
 }
 
 .briefing-page header {
@@ -1874,56 +1919,18 @@ h3 {
   font-size: 0.85rem;
 }
 
-.briefing-file {
-  position: absolute;
-  inset-inline-end: 4%;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  max-width: 92%;
-  padding: 0.7rem 0.9rem;
-  border-radius: 12px;
-  border-start-start-radius: 4px;
-  background: var(--wa-in);
-  color: var(--wa-text);
-  box-shadow: var(--shadow);
-  font-size: 0.8rem;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-}
-
-.briefing-file-icon {
-  display: grid;
-  flex-shrink: 0;
-  place-items: center;
-  width: 36px;
-  height: 42px;
-  border-radius: 6px;
-  background: #e5484d;
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: 800;
-}
-
 /* Calculator */
 
 .calculator {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  max-width: 1000px;
+  gap: 2rem;
+  max-width: 820px;
   margin-inline: auto;
-  overflow: hidden;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
   border: 1px solid var(--border);
   border-radius: 28px;
   background: var(--surface);
   box-shadow: var(--shadow);
-}
-
-.calculator-inputs {
-  display: grid;
-  gap: 1.75rem;
-  padding: clamp(1.5rem, 4vw, 2.75rem);
 }
 
 .slider {
@@ -1937,7 +1944,6 @@ h3 {
   justify-content: space-between;
   gap: 1rem;
   color: var(--ink-2);
-  font-size: 0.92rem;
   font-weight: 600;
 }
 
@@ -1983,44 +1989,43 @@ h3 {
 
 .calculator-results {
   display: grid;
-  align-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1.5rem;
-  padding: clamp(1.5rem, 4vw, 2.75rem);
-  background:
-    radial-gradient(400px 300px at 100% 0%, rgba(255, 255, 255, 0.14), transparent 70%),
-    linear-gradient(135deg, #e0522d, #b93a1b);
-  color: #fff;
 }
 
 .calculator-results > div {
   display: grid;
-  gap: 0.15rem;
-}
-
-.calculator-results > div + div {
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 0.35rem;
 }
 
 .calculator-results span {
-  font-size: 0.8rem;
+  color: var(--muted);
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  opacity: 0.85;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .calculator-results strong {
-  font-size: clamp(2.2rem, 4.5vw, 3rem);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  letter-spacing: -0.02em;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
 }
 
-.calculator-results small {
-  font-size: 0.85rem;
-  opacity: 0.85;
+.calculator-results .roi {
+  color: var(--teal);
+}
+
+.calculator-results small,
+.calculator-note {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.calculator-note {
+  margin: 0;
 }
 
 /* Feature previews */
@@ -2097,10 +2102,6 @@ h3 {
 /* Responsive */
 
 @media (max-width: 1024px) {
-  .calculator {
-    grid-template-columns: 1fr;
-  }
-
   .app {
     grid-template-columns: 1fr;
   }
@@ -2155,15 +2156,35 @@ h3 {
     width: 100%;
   }
 
-      .briefing-demo {
-    display: grid;
-    padding-bottom: 0;
+  .jobs {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
-  .briefing-file {
+  .jobs-group {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .jobs-label {
+    grid-column: 1 / -1;
+  }
+
+  .jobs-list button span {
+    display: none;
+  }
+
+  .jobs-demo {
     position: static;
-    justify-self: end;
-    margin-top: -0.75rem;
+  }
+
+  .jobs-demo > p {
+    display: block;
+  }
+
+  .hero-bubble {
+    padding: 1.1rem 1.2rem 0.7rem;
+    border-radius: 22px;
+    border-start-start-radius: 6px;
   }
 
   .calendar-demo {
@@ -2217,7 +2238,9 @@ h3 {
 
   .hero-copy {
     align-content: center;
+    width: min(100%, 36rem);
     min-height: calc(100svh - 64px - 3rem);
+    margin-inline: auto;
   }
 
   .hero {

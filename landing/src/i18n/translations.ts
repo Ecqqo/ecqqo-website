@@ -26,7 +26,13 @@ const en = {
     dark: "Dark",
   },
   hero: {
-    title: ["Someone important is waiting on your WhatsApp reply.", "Again.", "Ecqqo keeps track, so you don't have to."],
+    title: "Never leave an important WhatsApp message on read again.",
+    offer: {
+      before: "Ecqqo helps executives and founders ",
+      highlight: "miss 90% fewer important messages",
+      after:
+        " by flagging them instantly, then getting the meeting booked, the email sent and the reminder set in one reply. Set up in 5 minutes.",
+    },
     cta: "Message Ecqqo on WhatsApp",
   },
   chat: {
@@ -124,7 +130,6 @@ const en = {
       { heading: "Highlights", items: ["Q4 hiring plan approved", "Offsite moved to Oct 14"] },
       { heading: "Action items", items: ["Reply to Sarah on the board deck", "Chase legal on the Acme redlines"] },
     ],
-    file: "ecqqo-weekly-report-2026-09-28.pdf",
   },
   meetings: {
     ask: "“Find 30 minutes with Omar Thursday afternoon.”",
@@ -160,15 +165,13 @@ const en = {
   },
   calculator: {
     title: "What is your time worth?",
-    hours: "Hours a week on messages, scheduling and follow-ups",
-    rate: "Your hourly value",
-    share: "Share Ecqqo takes off your plate",
-    hoursBack: "Hours back",
-    value: "Time value",
-    roi: "Return on $20 a month",
-    perMonth: "/month",
-    perYear: "a year",
-    note: "An estimate from your inputs, not a guarantee.",
+    rate: "Your time is worth",
+    hoursBack: "Time back",
+    value: "Worth",
+    roi: "Return",
+    perMonth: "per month",
+    roiNote: "the Solo plan",
+    note: "Assumes about 10 hours a week on messages, email and scheduling, with Ecqqo handling about a quarter of it.",
   },
   pricing: {
     title: "Choose a plan that works for you.",
@@ -270,7 +273,12 @@ const ar: typeof en = {
     dark: "داكن",
   },
   hero: {
-    title: ["شخص مهم ينتظر ردك على واتساب.", "مرة أخرى.", "ايكو يتابع عنك، فلا داعي لأن تفعل."],
+    title: "لا تترك رسالة واتساب مهمة دون رد بعد اليوم.",
+    offer: {
+      before: "يساعد ايكو التنفيذيين والمؤسسين على ",
+      highlight: "تفويت رسائل مهمة أقل بنسبة 90%",
+      after: "، إذ ينبّههم إليها فوراً، ثم يحجز الاجتماع ويرسل البريد ويضبط التذكير برد واحد. الإعداد خلال 5 دقائق.",
+    },
     cta: "راسل ايكو على واتساب",
   },
   chat: {
@@ -368,7 +376,6 @@ const ar: typeof en = {
       { heading: "Highlights", items: ["اعتماد خطة التوظيف للربع الرابع", "نقل الملتقى الخارجي إلى 14 أكتوبر"] },
       { heading: "Action items", items: ["الرد على سارة بشأن عرض المجلس", "متابعة القسم القانوني بشأن تعديلات Acme"] },
     ],
-    file: "ecqqo-weekly-report-2026-09-28.pdf",
   },
   meetings: {
     ask: "«اعثر على نصف ساعة مع عمر الخميس بعد الظهر.»",
@@ -404,15 +411,13 @@ const ar: typeof en = {
   },
   calculator: {
     title: "كم يساوي وقتك؟",
-    hours: "ساعاتك أسبوعياً على الرسائل والمواعيد والمتابعات",
     rate: "قيمة ساعتك",
-    share: "النسبة التي يتولاها ايكو عنك",
-    hoursBack: "ساعات تستعيدها",
-    value: "قيمة الوقت",
-    roi: "العائد مقابل 20 دولاراً شهرياً",
-    perMonth: "/شهرياً",
-    perYear: "سنوياً",
-    note: "تقدير مبني على مدخلاتك، وليس ضماناً.",
+    hoursBack: "وقت تستعيده",
+    value: "قيمته",
+    roi: "العائد",
+    perMonth: "شهرياً",
+    roiNote: "مقارنة بخطة Solo",
+    note: "نفترض نحو 10 ساعات أسبوعياً على الرسائل والبريد والمواعيد، يتولى ايكو قرابة ربعها.",
   },
   pricing: {
     title: "اختر الخطة التي تناسبك.",

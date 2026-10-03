@@ -11,9 +11,20 @@ export function AlertsDemo() {
     <div className="panel alerts-demo">
       <div className="alerts-control">
         <span className="panel-label">{t.alerts.sensitivity}</span>
-        <div className="segmented" role="radiogroup" aria-label={t.alerts.sensitivity}>
+        <div
+          className="segmented"
+          role="radiogroup"
+          aria-label={t.alerts.sensitivity}
+        >
           {t.alerts.levels.map((label, index) => (
-            <button key={label} type="button" role="radio" aria-checked={level === index + 1} className={level === index + 1 ? "active" : ""} onClick={() => setLevel(index + 1)}>
+            <button
+              key={label}
+              type="button"
+              role="radio"
+              aria-checked={level === index + 1}
+              className={level === index + 1 ? "active" : ""}
+              onClick={() => setLevel(index + 1)}
+            >
               {label}
             </button>
           ))}
@@ -29,7 +40,9 @@ export function AlertsDemo() {
                 <strong>{message.name}</strong>
                 <span>{message.text}</span>
               </span>
-              <span className="inbox-badge">{flagged ? t.alerts.flagged : t.alerts.quiet}</span>
+              <span className="inbox-badge">
+                {flagged ? t.alerts.flagged : t.alerts.quiet}
+              </span>
             </li>
           );
         })}
@@ -48,12 +61,13 @@ const busy = [
   { day: 4, start: 9.5, length: 1 },
 ];
 
-const slot = (day: number, start: number, length: number) => ({
-  "--day": day,
-  insetInlineStart: `calc(var(--hour-width) + (${day} - var(--first-day)) * (100% - var(--hour-width)) / var(--days) + 2px)`,
-  top: `calc(${(start - 9) / hours.length} * 100% + 1px)`,
-  height: `calc(${length / hours.length} * 100% - 3px)`,
-}) as CSSProperties;
+const slot = (day: number, start: number, length: number) =>
+  ({
+    "--day": day,
+    insetInlineStart: `calc(var(--hour-width) + (${day} - var(--first-day)) * (100% - var(--hour-width)) / var(--days) + 2px)`,
+    top: `calc(${(start - 9) / hours.length} * 100% + 1px)`,
+    height: `calc(${length / hours.length} * 100% - 3px)`,
+  }) as CSSProperties;
 
 export function CalendarDemo() {
   const { t } = useLocale();
@@ -64,7 +78,11 @@ export function CalendarDemo() {
       <div className="calendar">
         <span />
         {t.meetings.days.map((day, index) => (
-          <span key={day} className={`calendar-day ${index === 3 ? "active" : ""}`} data-day={index}>
+          <span
+            key={day}
+            className={`calendar-day ${index === 3 ? "active" : ""}`}
+            data-day={index}
+          >
             {day}
           </span>
         ))}
@@ -75,7 +93,12 @@ export function CalendarDemo() {
             </span>
           ))}
           {busy.map((event, index) => (
-            <span key={index} className="calendar-event" data-day={event.day} style={slot(event.day, event.start, event.length)}>
+            <span
+              key={index}
+              className="calendar-event"
+              data-day={event.day}
+              style={slot(event.day, event.start, event.length)}
+            >
               {t.meetings.busy[index]}
             </span>
           ))}
@@ -92,10 +115,12 @@ export function CalendarDemo() {
   );
 }
 
-type ChatItem = Translation["modes"]["watch"]["features"][number]["chat"][number];
+type ChatItem =
+  Translation["modes"]["watch"]["features"][number]["chat"][number];
 
 function ChatLine({ item }: { item: ChatItem }) {
-  if (item.kind === "time") return <span className="demo-time">{item.text}</span>;
+  if (item.kind === "time")
+    return <span className="demo-time">{item.text}</span>;
   if (item.kind === "me")
     return (
       <span className="bubble me" dir="auto">
@@ -122,7 +147,11 @@ export function ChatDemo({ chat }: { chat: ChatItem[] }) {
   return (
     <div className="panel chat-demo">
       {chat.map((item, index) => (
-        <span key={index} className="chat-demo-line" style={{ animationDelay: `${index * 0.9}s` }}>
+        <span
+          key={index}
+          className="chat-demo-line"
+          style={{ animationDelay: `${index * 0.9}s` }}
+        >
           <ChatLine item={item} />
         </span>
       ))}
@@ -135,36 +164,33 @@ export function BriefingDemo() {
   const { briefing } = t;
 
   return (
-    <div className="briefing-demo">
-      <div className="briefing-page">
-        <header>
-          <img src="/logos/logo-icon-light.png" alt="" />
-          <div>
-            <strong>{briefing.title}</strong>
-            <span>
-              {briefing.periodLabel} · <bdi dir="ltr">{briefing.period}</bdi>
-            </span>
-          </div>
-        </header>
-        <section className="briefing-section tone-0">
-          <h4>{briefing.summaryHeading}</h4>
-          <p>{briefing.summary}</p>
+    <div className="briefing-page">
+      <header>
+        <img src="/logos/logo-icon-light.png" alt="" />
+        <div>
+          <strong>{briefing.title}</strong>
+          <span>
+            {briefing.periodLabel} · <bdi dir="ltr">{briefing.period}</bdi>
+          </span>
+        </div>
+      </header>
+      <section className="briefing-section tone-0">
+        <h4>{briefing.summaryHeading}</h4>
+        <p>{briefing.summary}</p>
+      </section>
+      {briefing.sections.map((section, index) => (
+        <section
+          key={section.heading}
+          className={`briefing-section tone-${index + 1}`}
+        >
+          <h4>{section.heading}</h4>
+          <ul>
+            {section.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </section>
-        {briefing.sections.map((section, index) => (
-          <section key={section.heading} className={`briefing-section tone-${index + 1}`}>
-            <h4>{section.heading}</h4>
-            <ul>
-              {section.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </div>
-      <div className="briefing-file">
-        <span className="briefing-file-icon">PDF</span>
-        <bdi dir="ltr">{briefing.file}</bdi>
-      </div>
+      ))}
     </div>
   );
 }

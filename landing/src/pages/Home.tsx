@@ -110,10 +110,8 @@ function Chat({ chat }: { chat: Translation["chat"] }) {
 
 function Modes() {
   const { t } = useLocale();
-  const [mode, setMode] = useState(0);
-  const [feature, setFeature] = useState(0);
-  const { features } = t.modes[modes[mode]];
-  const current = features[feature];
+  const [selected, setSelected] = useState<[(typeof modes)[number], number]>(["watch", 0]);
+  const current = t.modes[selected[0]].features[selected[1]];
   const demo = {
     alerts: <AlertsDemo />,
     briefing: <BriefingDemo />,
@@ -122,32 +120,27 @@ function Modes() {
   }[current.demo];
 
   return (
-    <div className="modes">
-      <div className="segmented modes-tabs" role="tablist">
-        {modes.map((key, index) => (
-          <button
-            key={key}
-            type="button"
-            role="tab"
-            aria-selected={mode === index}
-            className={mode === index ? "active" : ""}
-            onClick={() => {
-              setMode(index);
-              setFeature(0);
-            }}
-          >
-            {t.modes[key].tab}
-          </button>
+    <div className="jobs">
+      <div className="jobs-list">
+        {modes.map((mode) => (
+          <div key={mode} className="jobs-group">
+            <p className={`jobs-label ${mode}`}>{t.modes[mode].tab}</p>
+            {t.modes[mode].features.map((feature, index) => (
+              <button
+                key={feature.name}
+                type="button"
+                aria-pressed={selected[0] === mode && selected[1] === index}
+                className={selected[0] === mode && selected[1] === index ? "active" : ""}
+                onClick={() => setSelected([mode, index])}
+              >
+                <strong>{feature.name}</strong>
+                <span>{feature.text}</span>
+              </button>
+            ))}
+          </div>
         ))}
       </div>
-      <div className="feature-tabs" role="tablist">
-        {features.map((item, index) => (
-          <button key={item.name} type="button" role="tab" aria-selected={feature === index} className={feature === index ? "active" : ""} onClick={() => setFeature(index)}>
-            {item.name}
-          </button>
-        ))}
-      </div>
-      <div className="modes-panel" role="tabpanel" key={`${mode}-${feature}`}>
+      <div className="jobs-demo" key={current.name}>
         <p>{current.text}</p>
         {demo}
       </div>
@@ -165,11 +158,17 @@ export function Home() {
           <div className="aurora" aria-hidden="true" />
           <section className="hero container">
           <div className="hero-copy">
-            <h1>
-              {t.hero.title.map((line) => (
-                <span key={line}>{line}</span>
-              ))}
-            </h1>
+            <div className="hero-bubble">
+              <h1>{t.hero.title}</h1>
+              <span className="hero-ticks">
+                <Icon name="ticks" strokeWidth={2.2} />
+              </span>
+            </div>
+            <p className="hero-offer">
+              {t.hero.offer.before}
+              <strong>{t.hero.offer.highlight}</strong>
+              {t.hero.offer.after}
+            </p>
             <WhatsAppLink className="button">{t.hero.cta}</WhatsAppLink>
           </div>
           <div className="phone-wrap">
