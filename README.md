@@ -1,6 +1,6 @@
 # Ecqqo Website
 
-The public website for Ecqqo LLC at `ecqqo.com`. It is a static React/Vite site in `landing/`, served by a Cloudflare Worker with static assets only (no Worker code, no bindings). The Ecqqo application lives in its own repository and runs at `app.ecqqo.com`.
+The public website for Ecqqo LLC at `ecqqo.com`. It is a static React/Vite site, served by a Cloudflare Worker with static assets only (no Worker code, no bindings). The Ecqqo application lives in its own repository and runs at `app.ecqqo.com`.
 
 ## Commands
 
@@ -19,10 +19,10 @@ Cloudflare Workers Builds deploys every push to `main`. The Worker `ecqqo-websit
 | --- | --- |
 | Root directory | `/` |
 | Build command | `bun run check && bun run build` |
-| Deploy command | `bunx wrangler deploy -c landing/wrangler.jsonc` |
+| Deploy command | `bunx wrangler deploy` |
 | Preview builds | Off |
 
-The Worker serves `landing/dist` on the `ecqqo.com` and `www.ecqqo.com` custom domains, with single-page-application fallback. The contact form posts to `https://app.ecqqo.com/api/contact`, which creates a NeetoDesk ticket.
+The Worker serves `dist` on the `ecqqo.com` and `www.ecqqo.com` custom domains, with single-page-application fallback. The contact form posts to `https://app.ecqqo.com/api/contact`, which creates a NeetoDesk ticket.
 
 ## Public review URLs
 
