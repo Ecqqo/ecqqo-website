@@ -15,10 +15,14 @@ const pages: Record<string, () => React.JSX.Element> = {
   "/contact": Contact,
 };
 
-const Page = pages[location.pathname.replace(/\/$/, "")] ?? Home;
+const path = location.pathname.replace(/\/$/, "");
+const Page = pages[path] ?? Home;
+const canonicalUrl = `https://ecqqo.com${pages[path] ? path : "/"}`;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <LocaleProvider>
       <Page />
     </LocaleProvider>
