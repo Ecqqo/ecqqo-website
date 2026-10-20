@@ -2233,7 +2233,12 @@ h3 {
   }
 
   .phone {
-    height: 470px;
+    width: min(400px, 100%);
+    height: clamp(470px, calc(100svh - 64px - 4.5rem), 760px);
+  }
+
+  .hero-copy .button {
+    justify-self: center;
   }
 
   .hero-copy {
