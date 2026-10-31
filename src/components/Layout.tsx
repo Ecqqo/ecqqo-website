@@ -154,7 +154,7 @@ export function Layout({ children }: { children: ReactNode }) {
               {t.brandName}
             </a>
             <p>{t.footer.tagline}</p>
-         </div>
+          </div>
           <div className="footer-col">
             <h4>{t.footer.product}</h4>
             {links.map(([href, label]) => (

@@ -911,31 +911,6 @@ h3 {
   line-height: 1.6;
 }
 
-.footer-trust {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  justify-self: start;
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.footer-trust svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.footer-trust:hover {
-  color: var(--ink);
-}
-
 .footer-col {
   display: grid;
   align-content: start;
