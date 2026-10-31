@@ -5,19 +5,19 @@ export function DataDeletion() {
     <Layout>
       <main className="legal-page container" dir="ltr" lang="en">
         <h1>Data Deletion Instructions</h1>
-        <p className="legal-updated">Last updated September 28, 2026</p>
+        <p className="legal-updated">Last updated October 30, 2026</p>
         <section>
           <h2>Request deletion</h2>
-          <p>Send a request through our <a href="/contact?category=data-deletion">contact form</a> with the category “Data deletion”, using the email address associated with your Ecqqo account. Include the WhatsApp phone number or business account identifier connected to Ecqqo, if applicable.</p>
+          <p>Send a request through our <a href="/contact?category=data-deletion">contact form</a> with the category “Privacy and data requests”, using the email address associated with your Ecqqo account. Include the WhatsApp phone number or business account identifier connected to Ecqqo, if applicable.</p>
         </section>
         <section>
           <h2>What happens next</h2>
           <ol>
             <li>We acknowledge your request and may ask for information needed to verify your identity and authority over the account.</li>
-            <li>We disconnect linked services and delete or de-identify personal information associated with the verified account.</li>
+            <li>We cancel any subscription, disconnect your email and calendar accounts, and delete the personal information associated with the verified account. We keep billing records only as tax and accounting law requires.</li>
             <li>We confirm completion by email. We aim to complete valid requests within 30 days, subject to applicable law.</li>
           </ol>
-          <p>Information that must be retained for security, fraud prevention, legal compliance, or dispute resolution will be isolated and deleted when the applicable obligation ends. Backup copies may remain for a limited period before automatic deletion.</p>
+          <p>Backup copies are deleted automatically within a few days. To get a copy of your data instead, use the same form and say so in your message.</p>
         </section>
         <section>
           <h2>Disconnect WhatsApp</h2>

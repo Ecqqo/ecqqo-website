@@ -6,6 +6,8 @@ import { Privacy } from "./pages/Privacy";
 import { Terms } from "./pages/Terms";
 import { Contact } from "./pages/Contact";
 import { DataDeletion } from "./pages/DataDeletion";
+import "@fontsource-variable/dm-sans/opsz.css";
+import "@fontsource-variable/noto-sans-arabic";
 import "./styles.css";
 
 const pages: Record<string, () => React.JSX.Element> = {

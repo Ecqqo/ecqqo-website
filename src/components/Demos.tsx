@@ -1,6 +1,7 @@
 import { useState, type CSSProperties } from "react";
 import { useLocale } from "../i18n/locale";
 import type { Translation } from "../i18n/translations";
+import { ContactAvatar } from "./ContactAvatar";
 import { Icon } from "./Icon";
 
 export function AlertsDemo() {
@@ -35,7 +36,7 @@ export function AlertsDemo() {
           const flagged = message.level > 0 && message.level <= level;
           return (
             <li key={message.name} className={flagged ? "flagged" : ""}>
-              <span className="avatar">{message.name[0]}</span>
+              <ContactAvatar name={message.avatar} />
               <span className="inbox-text">
                 <strong>{message.name}</strong>
                 <span>{message.text}</span>
