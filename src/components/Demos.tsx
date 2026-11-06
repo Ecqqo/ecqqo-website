@@ -41,9 +41,7 @@ export function AlertsDemo() {
                 <strong>{message.name}</strong>
                 <span>{message.text}</span>
               </span>
-              <span className="inbox-badge">
-                {flagged ? t.alerts.flagged : t.alerts.quiet}
-              </span>
+              <span className="inbox-badge">{flagged ? t.alerts.flagged : t.alerts.quiet}</span>
             </li>
           );
         })}

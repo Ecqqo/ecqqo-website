@@ -1,14 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-import { FeaturePreview, type PreviewView } from "../components/CommandCenter";
+import { AppPreview, FeaturePreview, type PreviewView } from "../components/CommandCenter";
 import { Calculator } from "../components/Calculator";
 import { AlertsDemo, BriefingDemo, CalendarDemo, ChatDemo } from "../components/Demos";
 import { Icon } from "../components/Icon";
 import { Layout } from "../components/Layout";
+import { SectionIcon } from "../components/SectionIcon";
 import { WhatsAppLink, whatsappNumber } from "../components/WhatsAppLink";
 import { useLocale } from "../i18n/locale";
 import type { Translation } from "../i18n/translations";
 
 const modes = ["watch", "work"] as const;
+
+const integrations = [
+  ["whatsapp.png", "WhatsApp"],
+  ["gmail.jpg", "Gmail"],
+  ["google-calendar.jpg", "Google Calendar"],
+  ["outlook.jpg", "Outlook"],
+];
+
+const promiseIcons = ["userCheck", "adOff", "botOff", "lock", "eyeOff", "trash"] as const;
 
 const delegatePreviews: Partial<Record<number, PreviewView>> = { 1: "tasks", 2: "activity" };
 
@@ -123,7 +133,7 @@ function Modes() {
     <div className="jobs">
       <div className="jobs-list">
         {modes.map((mode) => (
-          <div key={mode} className="jobs-group">
+          <div key={mode} className={`jobs-group ${mode}`}>
             <p className={`jobs-label ${mode}`}>{t.modes[mode].tab}</p>
             {t.modes[mode].features.map((feature, index) => (
               <button
@@ -148,15 +158,35 @@ function Modes() {
   );
 }
 
+function GdprSeal() {
+  const { t } = useLocale();
+  return (
+    <a className="gdpr-seal" href="/privacy">
+      <svg viewBox="0 0 80 80" role="img" aria-label={t.footer.gdpr}>
+        <circle cx="40" cy="40" r="37" style={{ fill: "var(--tile)" }} stroke="currentColor" strokeWidth="1.4" />
+        <circle cx="40" cy="40" r="22.5" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2.5" />
+        {Array.from({ length: 12 }, (_, k) => {
+          const angle = (k / 12) * Math.PI * 2 - Math.PI / 2;
+          return <circle key={k} cx={40 + 29 * Math.cos(angle)} cy={40 + 29 * Math.sin(angle)} r="1.9" fill="currentColor" />;
+        })}
+        <text x="40" y="42.5" textAnchor="middle" fontSize="10.5" fontWeight="700" fill="currentColor">
+          GDPR
+        </text>
+        <text x="40" y="51" textAnchor="middle" fontSize="5.2" fontWeight="600" fill="currentColor">
+          {t.footer.gdprSeal}
+        </text>
+      </svg>
+    </a>
+  );
+}
+
 export function Home() {
   const { t } = useLocale();
 
   return (
     <Layout>
       <main>
-        <div className="hero-wrap">
-          <div className="aurora" aria-hidden="true" />
-          <section className="hero container">
+        <section className="hero container">
           <div className="hero-copy">
             <div className="hero-bubble">
               <h1>{t.hero.title}</h1>
@@ -169,34 +199,62 @@ export function Home() {
               <strong>{t.hero.offer.highlight}</strong>
               {t.hero.offer.after}
             </p>
-            <WhatsAppLink className="button">{t.hero.cta}</WhatsAppLink>
+            <WhatsAppLink className="button large">{t.hero.cta}</WhatsAppLink>
+            <div className="works-with">
+              <span>{t.hero.worksWith}</span>
+              {integrations.map(([icon, name]) => (
+                <img key={icon} src={`/icons/${icon}`} alt={name} title={name} />
+              ))}
+            </div>
           </div>
           <div className="phone-wrap">
             <div className="phone-box">
               <Chat chat={t.chat} />
-              <a className="gdpr-seal" href="/privacy" aria-label={t.footer.gdpr}>
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-                  <path d="m9 12 2 2 4-4" />
-                </svg>
-                <b>GDPR</b>
-                <small>{t.footer.gdprSeal}</small>
-              </a>
+              <GdprSeal />
             </div>
             <p className="phone-note">{t.chat.note}</p>
           </div>
-          </section>
-        </div>
+        </section>
 
         <section className="section container" id="what">
           <header className="section-header">
+            <SectionIcon name="modes" />
             <h2>{t.modes.title}</h2>
           </header>
           <Modes />
         </section>
 
+        <section className="section container" id="command-center">
+          <header className="section-header">
+            <SectionIcon name="dashboard" />
+            <h2>{t.showcase.title}</h2>
+            <p>{t.showcase.text}</p>
+          </header>
+          <div className="showcase">
+            <AppPreview view="today" />
+          </div>
+        </section>
+
+        <section className="section container narrow" id="privacy">
+          <header className="section-header">
+            <SectionIcon name="privacy" />
+            <h2>{t.privacy.title}</h2>
+          </header>
+          <ul className="promises">
+            {t.privacy.promises.map((promise, index) => (
+              <li key={promise}>
+                <span>
+                  <Icon name={promiseIcons[index]} />
+                </span>
+                {promise}
+              </li>
+            ))}
+          </ul>
+        </section>
+
         <section className="section container" id="calculator">
           <header className="section-header">
+            <SectionIcon name="time" />
             <h2>{t.calculator.title}</h2>
           </header>
           <Calculator />
@@ -204,11 +262,13 @@ export function Home() {
 
         <section className="section container" id="pricing">
           <header className="section-header">
+            <SectionIcon name="plan" />
             <h2>{t.pricing.title}</h2>
           </header>
           <div className="plans">
             {t.pricing.plans.map((plan, index) => (
-              <article key={plan.name} className={`card plan ${index === 1 ? "featured" : ""}`}>
+              <article key={plan.name} className="plan" data-featured={index === 1 || undefined}>
+                {index === 1 && <span className="plan-ribbon">{t.pricing.recommended}</span>}
                 <h3>{plan.name}</h3>
                 <p className="plan-audience">{plan.audience}</p>
                 <p className="plan-price">
@@ -220,6 +280,7 @@ export function Home() {
                     const preview = index === 1 ? delegatePreviews[featureIndex] : undefined;
                     return (
                       <li key={feature}>
+                        <Icon name="check" strokeWidth={2.4} />
                         <span>{feature}</span>
                         {preview && <FeaturePreview view={preview} label={feature} />}
                       </li>
@@ -235,6 +296,7 @@ export function Home() {
 
         <section className="section container narrow" id="faq">
           <header className="section-header">
+            <SectionIcon name="questions" />
             <h2>{t.faq.title}</h2>
           </header>
           <div className="faq">
@@ -250,7 +312,7 @@ export function Home() {
         <section className="container">
           <div className="final">
             <h2>{t.final.title}</h2>
-            <WhatsAppLink className="button light">{t.hero.cta}</WhatsAppLink>
+            <WhatsAppLink className="button large">{t.hero.cta}</WhatsAppLink>
             <p className="final-number">
               <bdi dir="ltr">{whatsappNumber}</bdi>
             </p>

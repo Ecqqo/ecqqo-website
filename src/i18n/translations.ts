@@ -10,7 +10,7 @@ const features = (list: Feature[]) => list;
 
 const en = {
   pageTitle: "Ecqqo | Your AI executive assistant in WhatsApp",
-  brandName: "Ecqqo",
+  brandName: "ecqqo",
   nav: {
     what: "What it does",
     pricing: "Pricing",
@@ -34,6 +34,7 @@ const en = {
         " by flagging them instantly, then getting the meeting booked, the email sent and the reminder set in one reply. Set up in 5 minutes.",
     },
     cta: "Message Ecqqo on WhatsApp",
+    worksWith: "Works with",
   },
   chat: {
     name: "Ecqqo",
@@ -162,6 +163,29 @@ const en = {
     range: "Last 14 days",
     byArea: "By area",
     areas: ["Email", "Meetings", "Calendar", "Reminders"],
+    greeting: "Good morning, Alex",
+    date: "Monday 28 September",
+    brief: {
+      heading: "Latest brief",
+      time: "Today · 07:30",
+      intro: "Good morning. Three things need you today:",
+      items: ["Reply to Sarah on the board deck", "Sign the NDA from Legal", "4:00 PM investor call"],
+    },
+  },
+  showcase: {
+    title: "Your day on one screen.",
+    text: "On Delegate, you and your assistant follow every task, alert and brief.",
+  },
+  privacy: {
+    title: "Your messages stay yours.",
+    promises: [
+      "You choose which chats Ecqqo sees",
+      "Never sold or used for ads",
+      "Never used to train AI",
+      "Encrypted in transit and at rest",
+      "Passwords and card numbers removed automatically",
+      "Disconnect or delete anytime",
+    ],
   },
   calculator: {
     title: "What is your time worth?",
@@ -177,6 +201,7 @@ const en = {
     title: "Choose a plan that works for you.",
     month: "/month",
     cta: "Start on WhatsApp",
+    recommended: "Recommended",
     preview: "See what this looks like",
     close: "Close",
     plans: [
@@ -282,6 +307,7 @@ const ar: typeof en = {
       after: "، إذ ينبّههم إليها فوراً، ثم يحجز الاجتماع ويرسل البريد ويضبط التذكير برد واحد. الإعداد خلال 5 دقائق.",
     },
     cta: "راسل ايكو على واتساب",
+    worksWith: "يعمل مع",
   },
   chat: {
     name: "ايكو",
@@ -410,6 +436,29 @@ const ar: typeof en = {
     range: "آخر 14 يوماً",
     byArea: "حسب المجال",
     areas: ["البريد", "الاجتماعات", "التقويم", "التذكيرات"],
+    greeting: "صباح الخير يا أليكس",
+    date: "الاثنين 28 سبتمبر",
+    brief: {
+      heading: "آخر تقرير",
+      time: "اليوم · 07:30",
+      intro: "صباح الخير. ثلاثة أمور تحتاجك اليوم:",
+      items: ["الرد على سارة بشأن عرض المجلس", "توقيع اتفاقية السرية من القسم القانوني", "مكالمة المستثمرين الساعة 4:00 م"],
+    },
+  },
+  showcase: {
+    title: "يومك في شاشة واحدة.",
+    text: "في Delegate، تتابع أنت ومساعدك كل مهمة وتنبيه وتقرير.",
+  },
+  privacy: {
+    title: "رسائلك تبقى لك.",
+    promises: [
+      "أنت تختار المحادثات التي يراها ايكو",
+      "لا تُباع ولا تُستخدم للإعلانات",
+      "لا تُستخدم لتدريب الذكاء الاصطناعي",
+      "مشفّرة أثناء النقل والتخزين",
+      "حذف كلمات المرور وأرقام البطاقات تلقائياً",
+      "افصل حسابك أو احذف بياناتك في أي وقت",
+    ],
   },
   calculator: {
     title: "كم يساوي وقتك؟",
@@ -425,6 +474,7 @@ const ar: typeof en = {
     title: "اختر الخطة التي تناسبك.",
     month: "/شهرياً",
     cta: "ابدأ على واتساب",
+    recommended: "موصى به",
     preview: "شاهد كيف يبدو",
     close: "إغلاق",
     plans: [

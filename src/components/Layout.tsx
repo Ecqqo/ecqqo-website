@@ -66,6 +66,7 @@ export function Layout({ children }: { children: ReactNode }) {
     ["/#what", t.nav.what],
     ["/#pricing", t.nav.pricing],
     ["/#faq", t.nav.faq],
+    ["/contact", t.nav.contact],
   ];
 
   return (
@@ -73,16 +74,15 @@ export function Layout({ children }: { children: ReactNode }) {
       <header className="topbar">
         <div className="container topbar-inner">
           <a className="brand" href="/">
-            <img src="/logos/logo-icon.png" alt="" />
+            <img src="/logos/ecqqo-mark.png" alt="" />
             {t.brandName}
           </a>
           <nav className={menuOpen ? "open" : ""}>
             {links.map(([href, label]) => (
-              <a key={href} href={href} onClick={() => setMenuOpen(false)}>
+              <a key={href} href={href} aria-current={location.pathname === href ? "page" : undefined} onClick={() => setMenuOpen(false)}>
                 {label}
               </a>
             ))}
-            <a href="/contact">{t.nav.contact}</a>
           </nav>
           <div className="topbar-actions">
             <div className="settings" ref={settingsRef}>
@@ -150,14 +150,14 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="container footer-inner">
           <div className="footer-brand">
             <a className="brand" href="/">
-              <img src="/logos/logo-icon.png" alt="" />
+              <img src="/logos/ecqqo-mark.png" alt="" />
               {t.brandName}
             </a>
             <p>{t.footer.tagline}</p>
           </div>
           <div className="footer-col">
             <h4>{t.footer.product}</h4>
-            {links.map(([href, label]) => (
+            {links.slice(0, 3).map(([href, label]) => (
               <a key={href} href={href}>
                 {label}
               </a>
