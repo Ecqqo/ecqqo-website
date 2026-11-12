@@ -24,10 +24,8 @@ export function Contact() {
 
   return (
     <Layout>
-      <main className="contact container">
-        <header className="section-header">
-          <h1>{t.contact.title}</h1>
-        </header>
+      <main className="page contact wrap">
+        <h1>{t.contact.title}</h1>
         {status === "sent" ? (
           <p className="contact-sent" role="status">
             {t.contact.sent}
@@ -64,7 +62,7 @@ export function Contact() {
               <textarea id="contact-message" name="message" required maxLength={5000} rows={6} />
             </label>
             <input className="contact-trap" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-            <button type="submit" className="button" disabled={status === "sending"}>
+            <button type="submit" className="btn big" disabled={status === "sending"}>
               {status === "sending" ? t.contact.sending : t.contact.send}
             </button>
             {status === "failed" && (

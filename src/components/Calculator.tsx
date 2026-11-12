@@ -11,46 +11,41 @@ export function Calculator() {
   const value = hoursBack * rate;
 
   return (
-    <div className="calculator">
-      <label className="slider">
-        <span className="slider-head">
-          <span>{t.calculator.rate}</span>
+    <div className="calc">
+      <div className="calc-top">
+        <label htmlFor="rate">{t.calculator.rate}</label>
+        <output htmlFor="rate">
           <bdi dir="ltr">${number.format(rate)}/h</bdi>
-        </span>
-        <input
-          type="range"
-          min={50}
-          max={1000}
-          step={25}
-          value={rate}
-          onChange={(event) => setRate(Number(event.target.value))}
-          style={{ "--fill": `${((rate - 50) / 950) * 100}%` } as CSSProperties}
-        />
-      </label>
-      <div className="calculator-results" aria-live="polite">
+        </output>
+      </div>
+      <input
+        id="rate"
+        type="range"
+        min={50}
+        max={1000}
+        step={25}
+        value={rate}
+        onChange={(event) => setRate(Number(event.target.value))}
+        style={{ "--fill": `${((rate - 50) / 950) * 100}%` } as CSSProperties}
+      />
+      <div className="stats" aria-live="polite">
         <div>
           <span>{t.calculator.hoursBack}</span>
-          <strong>
-            <bdi dir="ltr">{number.format(hoursBack)}h</bdi>
-          </strong>
+          <b><bdi dir="ltr">{number.format(hoursBack)}h</bdi></b>
           <small>{t.calculator.perMonth}</small>
         </div>
         <div>
           <span>{t.calculator.value}</span>
-          <strong>
-            <bdi dir="ltr">${number.format(value)}</bdi>
-          </strong>
+          <b><bdi dir="ltr">${number.format(value)}</bdi></b>
           <small>{t.calculator.perMonth}</small>
         </div>
         <div>
           <span>{t.calculator.roi}</span>
-          <strong className="roi">
-            <bdi dir="ltr">{number.format(value / soloPrice)}×</bdi>
-          </strong>
+          <b className="roi"><bdi dir="ltr">{number.format(value / soloPrice)}×</bdi></b>
           <small>{t.calculator.roiNote}</small>
         </div>
       </div>
-      <p className="calculator-note">{t.calculator.note}</p>
+      <p className="note">{t.calculator.note}</p>
     </div>
   );
 }

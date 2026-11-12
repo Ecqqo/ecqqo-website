@@ -1,15 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import { AppPreview, FeaturePreview, type PreviewView } from "../components/CommandCenter";
 import { Calculator } from "../components/Calculator";
-import { AlertsDemo, BriefingDemo, CalendarDemo, ChatDemo } from "../components/Demos";
-import { Icon } from "../components/Icon";
+import { Features } from "../components/Features";
+import { HeroChat } from "../components/HeroChat";
+import { Check, Plus, Ticks } from "../components/Icon";
 import { Layout } from "../components/Layout";
-import { SectionIcon } from "../components/SectionIcon";
 import { WhatsAppLink, whatsappNumber } from "../components/WhatsAppLink";
 import { useLocale } from "../i18n/locale";
-import type { Translation } from "../i18n/translations";
-
-const modes = ["watch", "work"] as const;
 
 const integrations = [
   ["whatsapp.png", "WhatsApp"],
@@ -18,304 +13,157 @@ const integrations = [
   ["outlook.jpg", "Outlook"],
 ];
 
-const promiseIcons = ["userCheck", "adOff", "botOff", "lock", "eyeOff", "trash"] as const;
-
-const delegatePreviews: Partial<Record<number, PreviewView>> = { 1: "tasks", 2: "activity" };
-
-function Chat({ chat }: { chat: Translation["chat"] }) {
-  const phone = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  const [shown, setShown] = useState(0);
-  const [typing, setTyping] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      setInView(true);
-      observer.disconnect();
-    }, { threshold: 0.5 });
-    observer.observe(phone.current!);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!inView) return;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setShown(chat.messages.length);
-      return;
-    }
-    let count = 0;
-    let timer = 0;
-    const next = () => {
-      if (count === chat.messages.length) {
-        timer = window.setTimeout(() => {
-          count = 0;
-          setShown(0);
-          next();
-        }, 6000);
-        return;
-      }
-      if (chat.messages[count].from === "me") {
-        setShown(++count);
-        timer = window.setTimeout(next, 2600);
-        return;
-      }
-      setTyping(true);
-      timer = window.setTimeout(() => {
-        setTyping(false);
-        setShown(++count);
-        timer = window.setTimeout(next, 3600);
-      }, 1400);
-    };
-    setShown(0);
-    timer = window.setTimeout(next, 500);
-    return () => {
-      window.clearTimeout(timer);
-      setTyping(false);
-    };
-  }, [chat, inView]);
-
-  return (
-    <div className="phone" aria-hidden="true" ref={phone}>
-      <div className="phone-screen">
-        <div className="wa-header">
-          <div className="wa-avatar">
-            <img src="/logos/logo-icon-light.png" alt="" />
-          </div>
-          <div>
-            <p className="wa-name">{chat.name}</p>
-            <p className="wa-status">{typing ? "…" : chat.status}</p>
-          </div>
-        </div>
-        <div className="wa-messages">
-          {chat.messages.slice(0, shown).map((message, index) => (
-            <div key={index} className={`bubble ${message.from}`}>
-              {message.lines.map((line, lineIndex) => (
-                <span key={lineIndex} dir="auto">
-                  {line || "\u00a0"}
-                </span>
-              ))}
-              {message.footer && <span className="bubble-footer">— {message.footer}</span>}
-              <span className="bubble-time">{message.time}</span>
-            </div>
-          ))}
-          {typing && (
-            <div className="bubble ecqqo typing">
-              <span />
-              <span />
-              <span />
-            </div>
-          )}
-        </div>
-        <div className="wa-input">
-          <span>{chat.placeholder}</span>
-          <span className="wa-mic">
-            <Icon name="mic" strokeWidth={2} />
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Modes() {
-  const { t } = useLocale();
-  const [selected, setSelected] = useState<[(typeof modes)[number], number]>(["watch", 0]);
-  const current = t.modes[selected[0]].features[selected[1]];
-  const demo = {
-    alerts: <AlertsDemo />,
-    briefing: <BriefingDemo />,
-    calendar: <CalendarDemo />,
-    chat: <ChatDemo chat={current.chat} />,
-  }[current.demo];
-
-  return (
-    <div className="jobs">
-      <div className="jobs-list">
-        {modes.map((mode) => (
-          <div key={mode} className={`jobs-group ${mode}`}>
-            <p className={`jobs-label ${mode}`}>{t.modes[mode].tab}</p>
-            {t.modes[mode].features.map((feature, index) => (
-              <button
-                key={feature.name}
-                type="button"
-                aria-pressed={selected[0] === mode && selected[1] === index}
-                className={selected[0] === mode && selected[1] === index ? "active" : ""}
-                onClick={() => setSelected([mode, index])}
-              >
-                <strong>{feature.name}</strong>
-                <span>{feature.text}</span>
-              </button>
-            ))}
-          </div>
-        ))}
-      </div>
-      <div className="jobs-demo" key={current.name}>
-        <p>{current.text}</p>
-        {demo}
-      </div>
-    </div>
-  );
-}
-
-function GdprSeal() {
-  const { t } = useLocale();
-  return (
-    <a className="gdpr-seal" href="/privacy">
-      <svg viewBox="0 0 80 80" role="img" aria-label={t.footer.gdpr}>
-        <circle cx="40" cy="40" r="37" style={{ fill: "var(--tile)" }} stroke="currentColor" strokeWidth="1.4" />
-        <circle cx="40" cy="40" r="22.5" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2.5" />
-        {Array.from({ length: 12 }, (_, k) => {
-          const angle = (k / 12) * Math.PI * 2 - Math.PI / 2;
-          return <circle key={k} cx={40 + 29 * Math.cos(angle)} cy={40 + 29 * Math.sin(angle)} r="1.9" fill="currentColor" />;
-        })}
-        <text x="40" y="42.5" textAnchor="middle" fontSize="10.5" fontWeight="700" fill="currentColor">
-          GDPR
-        </text>
-        <text x="40" y="51" textAnchor="middle" fontSize="5.2" fontWeight="600" fill="currentColor">
-          {t.footer.gdprSeal}
-        </text>
-      </svg>
-    </a>
-  );
-}
-
 export function Home() {
   const { t } = useLocale();
 
   return (
     <Layout>
       <main>
-        <section className="hero container">
-          <div className="hero-copy">
-            <div className="hero-bubble">
-              <h1>{t.hero.title}</h1>
-              <span className="hero-ticks">
-                <Icon name="ticks" strokeWidth={2.2} />
+        <section className="hero">
+          <div className="wrap">
+            <h1>
+              {t.hero.title.before}
+              <span className="nw">
+                <em>
+                  {t.hero.title.highlight}
+                  <svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M3 13 C 60 5, 120 6, 170 9 S 260 15, 297 6" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+                  </svg>
+                </em>
+                {t.hero.title.after}
+                <Ticks label={t.hero.seen} />
               </span>
-            </div>
-            <p className="hero-offer">
-              {t.hero.offer.before}
-              <strong>{t.hero.offer.highlight}</strong>
-              {t.hero.offer.after}
-            </p>
-            <WhatsAppLink className="button large">{t.hero.cta}</WhatsAppLink>
-            <div className="works-with">
+            </h1>
+            <p className="sub">{t.hero.sub}</p>
+            <WhatsAppLink className="btn big">{t.hero.cta}</WhatsAppLink>
+            <p className="works">
               <span>{t.hero.worksWith}</span>
-              {integrations.map(([icon, name]) => (
-                <img key={icon} src={`/icons/${icon}`} alt={name} title={name} />
+              <span className="icons">
+                {integrations.map(([icon, name]) => (
+                  <img key={icon} src={`/icons/${icon}`} alt={name} title={name} />
+                ))}
+              </span>
+            </p>
+          </div>
+          <div className="stage">
+            <img className="walker" src="/illustrations/hero.webp" alt="" />
+            <div className="phone">
+              <HeroChat />
+              <p className="phone-note">{t.chat.note}</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="sec" id="what">
+          <div className="wrap">
+            <h2>{t.modes.title}</h2>
+            <Features />
+          </div>
+        </section>
+
+        <section className="sec calc-sec" id="calculator">
+          <div className="wrap">
+            <h2>{t.calculator.title}</h2>
+            <Calculator />
+          </div>
+        </section>
+
+        <section className="sec cc">
+          <div className="wrap">
+            <h2>
+              {t.showcase.title} <span>{t.showcase.subtitle}</span>
+            </h2>
+            <div className="cc-stage">
+              <div className="frame" dir="ltr">
+                <picture>
+                  <source media="(max-width: 860px)" srcSet="/app/today-mobile.webp" />
+                  <img src="/app/today-desktop.webp" alt={t.showcase.alt} />
+                </picture>
+              </div>
+              <img className="hand" src="/illustrations/handover.webp" alt="" />
+            </div>
+          </div>
+        </section>
+
+        <section className="priv" id="privacy">
+          <div className="wrap">
+            <img className="art" src="/illustrations/lock.webp" alt="" />
+            <div>
+              <h2>
+                {t.privacy.title} <span>{t.privacy.subtitle}</span>
+              </h2>
+              <ul>
+                {t.privacy.promises.map((promise) => (
+                  <li key={promise}>
+                    <Check />
+                    {promise}
+                  </li>
+                ))}
+              </ul>
+              <a className="seal" href="/privacy">
+                <i>GDPR</i>
+                {t.privacy.gdpr}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="sec price" id="pricing">
+          <div className="wrap">
+            <h2>{t.pricing.title}</h2>
+            <div className="plans">
+              {t.pricing.plans.map((plan, index) => (
+                <article key={plan.name} className={`plan ${index === 1 ? "rec" : ""}`}>
+                  {index === 1 && <span className="rb">{t.pricing.recommended}</span>}
+                  <h3>{plan.name}</h3>
+                  <p className="who">{plan.audience}</p>
+                  <p className="amt">
+                    <bdi dir="ltr">{plan.price}</bdi>
+                    <small>{t.pricing.month}</small>
+                  </p>
+                  <ul>
+                    {plan.features.map((feature) => (
+                      <li key={feature}>
+                        <Check />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <WhatsAppLink className={`btn ${index === 1 ? "" : "dark"}`}>{t.pricing.cta}</WhatsAppLink>
+                </article>
+              ))}
+            </div>
+            <p className="plans-note">{t.pricing.note}</p>
+          </div>
+        </section>
+
+        <section className="sec faq-sec" id="faq">
+          <div className="wrap">
+            <h2>{t.faq.title}</h2>
+            <div className="faq">
+              {t.faq.items.map((item) => (
+                <details key={item.q}>
+                  <summary>
+                    {item.q}
+                    <i>
+                      <Plus />
+                    </i>
+                  </summary>
+                  <p>{item.a}</p>
+                </details>
               ))}
             </div>
           </div>
-          <div className="phone-wrap">
-            <div className="phone-box">
-              <Chat chat={t.chat} />
-              <GdprSeal />
-            </div>
-            <p className="phone-note">{t.chat.note}</p>
-          </div>
         </section>
 
-        <section className="section container" id="what">
-          <header className="section-header">
-            <SectionIcon name="modes" />
-            <h2>{t.modes.title}</h2>
-          </header>
-          <Modes />
-        </section>
-
-        <section className="section container" id="command-center">
-          <header className="section-header">
-            <SectionIcon name="dashboard" />
-            <h2>{t.showcase.title}</h2>
-            <p>{t.showcase.text}</p>
-          </header>
-          <div className="showcase">
-            <AppPreview view="today" />
-          </div>
-        </section>
-
-        <section className="section container narrow" id="privacy">
-          <header className="section-header">
-            <SectionIcon name="privacy" />
-            <h2>{t.privacy.title}</h2>
-          </header>
-          <ul className="promises">
-            {t.privacy.promises.map((promise, index) => (
-              <li key={promise}>
-                <span>
-                  <Icon name={promiseIcons[index]} />
-                </span>
-                {promise}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="section container" id="calculator">
-          <header className="section-header">
-            <SectionIcon name="time" />
-            <h2>{t.calculator.title}</h2>
-          </header>
-          <Calculator />
-        </section>
-
-        <section className="section container" id="pricing">
-          <header className="section-header">
-            <SectionIcon name="plan" />
-            <h2>{t.pricing.title}</h2>
-          </header>
-          <div className="plans">
-            {t.pricing.plans.map((plan, index) => (
-              <article key={plan.name} className="plan" data-featured={index === 1 || undefined}>
-                {index === 1 && <span className="plan-ribbon">{t.pricing.recommended}</span>}
-                <h3>{plan.name}</h3>
-                <p className="plan-audience">{plan.audience}</p>
-                <p className="plan-price">
-                  <bdi dir="ltr">{plan.price}</bdi>
-                  <span>{t.pricing.month}</span>
-                </p>
-                <ul>
-                  {plan.features.map((feature, featureIndex) => {
-                    const preview = index === 1 ? delegatePreviews[featureIndex] : undefined;
-                    return (
-                      <li key={feature}>
-                        <Icon name="check" strokeWidth={2.4} />
-                        <span>{feature}</span>
-                        {preview && <FeaturePreview view={preview} label={feature} />}
-                      </li>
-                    );
-                  })}
-                </ul>
-                <WhatsAppLink className={`button ${index === 1 ? "" : "secondary"}`}>{t.pricing.cta}</WhatsAppLink>
-              </article>
-            ))}
-          </div>
-          <p className="plans-note">{t.pricing.note}</p>
-        </section>
-
-        <section className="section container narrow" id="faq">
-          <header className="section-header">
-            <SectionIcon name="questions" />
-            <h2>{t.faq.title}</h2>
-          </header>
-          <div className="faq">
-            {t.faq.items.map((item) => (
-              <details key={item.q}>
-                <summary>{item.q}</summary>
-                <p>{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-
-        <section className="container">
-          <div className="final">
+        <section className="final">
+          <div className="wrap">
+            <img src="/illustrations/final.webp" alt="" />
             <h2>{t.final.title}</h2>
-            <WhatsAppLink className="button large">{t.hero.cta}</WhatsAppLink>
-            <p className="final-number">
+            <WhatsAppLink className="btn big">{t.hero.cta}</WhatsAppLink>
+            <a className="tel" href="tel:+12819445450">
               <bdi dir="ltr">{whatsappNumber}</bdi>
-            </p>
+            </a>
           </div>
         </section>
       </main>

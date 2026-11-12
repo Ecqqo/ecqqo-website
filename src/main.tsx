@@ -6,6 +6,8 @@ import { Privacy } from "./pages/Privacy";
 import { Terms } from "./pages/Terms";
 import { Contact } from "./pages/Contact";
 import { DataDeletion } from "./pages/DataDeletion";
+import "@fontsource-variable/bricolage-grotesque/opsz.css";
+import "@fontsource-variable/hanken-grotesk";
 import "@fontsource-variable/noto-sans-arabic";
 import "./styles.css";
 

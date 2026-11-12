@@ -3,7 +3,7 @@ import { Layout } from "../components/Layout";
 export function Privacy() {
   return (
     <Layout>
-      <main className="legal-page container" dir="ltr" lang="en">
+      <main className="page legal wrap" dir="ltr" lang="en">
         <h1>Privacy Policy</h1>
         <p className="legal-updated">Effective October 30, 2026</p>
 
