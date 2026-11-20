@@ -1,4 +1,6 @@
+import type { CSSProperties } from "react";
 import { Calculator } from "../components/Calculator";
+import { Compare } from "../components/Compare";
 import { Features } from "../components/Features";
 import { HeroChat } from "../components/HeroChat";
 import { Check, Plus, Ticks } from "../components/Icon";
@@ -27,7 +29,7 @@ export function Home() {
                 <em>
                   {t.hero.title.highlight}
                   <svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M3 13 C 60 5, 120 6, 170 9 S 260 15, 297 6" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+                    <path d="M3 13 C 60 5, 120 6, 170 9 S 260 15, 297 6" pathLength={1} fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
                   </svg>
                 </em>
                 {t.hero.title.after}
@@ -56,30 +58,25 @@ export function Home() {
 
         <section className="sec" id="what">
           <div className="wrap">
-            <h2>{t.modes.title}</h2>
+            <h2 data-reveal>{t.modes.title}</h2>
             <Features />
           </div>
         </section>
 
         <section className="sec calc-sec" id="calculator">
           <div className="wrap">
-            <h2>{t.calculator.title}</h2>
+            <h2 data-reveal>{t.calculator.title}</h2>
             <Calculator />
           </div>
         </section>
 
-        <section className="sec cc">
+        <section className="sec cc" id="showcase">
           <div className="wrap">
-            <h2>
+            <h2 data-reveal>
               {t.showcase.title} <span>{t.showcase.subtitle}</span>
             </h2>
-            <div className="cc-stage">
-              <div className="frame" dir="ltr">
-                <picture>
-                  <source media="(max-width: 860px)" srcSet="/app/today-mobile.webp" />
-                  <img src="/app/today-desktop.webp" alt={t.showcase.alt} />
-                </picture>
-              </div>
+            <div className="cc-stage" data-reveal>
+              <Compare />
               <img className="hand" src="/illustrations/handover.webp" alt="" />
             </div>
           </div>
@@ -87,14 +84,14 @@ export function Home() {
 
         <section className="priv" id="privacy">
           <div className="wrap">
-            <img className="art" src="/illustrations/lock.webp" alt="" />
-            <div>
+            <img className="art" src="/illustrations/lock.webp" alt="" data-reveal />
+            <div data-reveal>
               <h2>
                 {t.privacy.title} <span>{t.privacy.subtitle}</span>
               </h2>
               <ul>
-                {t.privacy.promises.map((promise) => (
-                  <li key={promise}>
+                {t.privacy.promises.map((promise, index) => (
+                  <li key={promise} data-reveal style={{ "--i": index + 2 } as CSSProperties}>
                     <Check />
                     {promise}
                   </li>
@@ -110,10 +107,10 @@ export function Home() {
 
         <section className="sec price" id="pricing">
           <div className="wrap">
-            <h2>{t.pricing.title}</h2>
+            <h2 data-reveal>{t.pricing.title}</h2>
             <div className="plans">
               {t.pricing.plans.map((plan, index) => (
-                <article key={plan.name} className={`plan ${index === 1 ? "rec" : ""}`}>
+                <article key={plan.name} className={`plan ${index === 1 ? "rec" : ""}`} data-reveal style={{ "--i": index } as CSSProperties}>
                   {index === 1 && <span className="rb">{t.pricing.recommended}</span>}
                   <h3>{plan.name}</h3>
                   <p className="who">{plan.audience}</p>
@@ -139,10 +136,10 @@ export function Home() {
 
         <section className="sec faq-sec" id="faq">
           <div className="wrap">
-            <h2>{t.faq.title}</h2>
+            <h2 data-reveal>{t.faq.title}</h2>
             <div className="faq">
-              {t.faq.items.map((item) => (
-                <details key={item.q}>
+              {t.faq.items.map((item, index) => (
+                <details key={item.q} data-reveal style={{ "--i": index } as CSSProperties}>
                   <summary>
                     {item.q}
                     <i>
@@ -157,7 +154,7 @@ export function Home() {
         </section>
 
         <section className="final">
-          <div className="wrap">
+          <div className="wrap" data-reveal>
             <img src="/illustrations/final.webp" alt="" />
             <h2>{t.final.title}</h2>
             <WhatsAppLink className="btn big">{t.hero.cta}</WhatsAppLink>

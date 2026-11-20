@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { useLocale } from "../i18n/locale";
 import type { Translation } from "../i18n/translations";
 import { Ticks } from "./Icon";
@@ -61,10 +61,10 @@ function AlertsCard() {
         </div>
       </div>
       <ul>
-        {t.alerts.messages.map((message) => {
+        {t.alerts.messages.map((message, index) => {
           const flagged = message.level > 0 && message.level <= level;
           return (
-            <li key={message.name} className="row">
+            <li key={message.name} className="row" style={{ "--i": index } as CSSProperties}>
               <span className={`why ${flagged ? "hot" : ""}`}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   {alertIcons[message.icon]}
@@ -83,7 +83,7 @@ function AlertsCard() {
   );
 }
 
-function Bubble({ item }: { item: ChatItem }) {
+function Bubble({ item, delay }: { item: ChatItem; delay: number }) {
   const time = (
     <span className="t">
       {item.time}
@@ -92,7 +92,7 @@ function Bubble({ item }: { item: ChatItem }) {
   );
   if (item.kind === "voice")
     return (
-      <div className="b out">
+      <div className="b out" style={{ animationDelay: `${delay}s` }}>
         <span className="vn">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M8 5v14l11-7z" />
@@ -109,7 +109,7 @@ function Bubble({ item }: { item: ChatItem }) {
     );
   if (item.kind === "doc")
     return (
-      <div className="b in">
+      <div className="b in" style={{ animationDelay: `${delay}s` }}>
         <span className="doc">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
             <path d="M6 2.5h8l4.5 4.5v14.5H6z" />
@@ -124,7 +124,7 @@ function Bubble({ item }: { item: ChatItem }) {
       </div>
     );
   return (
-    <div className={`b ${item.kind === "me" ? "out" : "in"}`}>
+    <div className={`b ${item.kind === "me" ? "out" : "in"}`} style={{ animationDelay: `${delay}s` }}>
       <span dir="auto">{item.text}</span>
       {time}
       {item.footer && <span className="foot">{item.footer}</span>}
@@ -135,11 +135,20 @@ function Bubble({ item }: { item: ChatItem }) {
 export function Features() {
   const { t } = useLocale();
   const [selected, setSelected] = useState<Selection>(["watch", 0]);
+  const [autoplay, setAutoplay] = useState(true);
+  const [inView, setInView] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
   const row = useRef<HTMLDivElement>(null);
   const touchStart = useRef<number | null>(null);
   const tabs = modes.flatMap((mode) => t.modes[mode].features.map((_, index): Selection => [mode, index]));
   const position = tabs.findIndex(([mode, index]) => mode === selected[0] && index === selected[1]);
   const feature = t.modes[selected[0]].features[selected[1]];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.3 });
+    observer.observe(root.current!);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const scroller = row.current!;
@@ -155,11 +164,13 @@ export function Features() {
     if (Math.abs(distance) < 50) return;
     const forward = document.documentElement.dir === "rtl" ? distance > 0 : distance < 0;
     const next = tabs[position + (forward ? 1 : -1)];
-    if (next) setSelected(next);
+    if (!next) return;
+    setAutoplay(false);
+    setSelected(next);
   }
 
   return (
-    <div className="feat">
+    <div className="feat" ref={root} data-reveal onClick={() => setAutoplay(false)}>
       <div className="side" ref={row}>
         {modes.map((mode) => (
           <div key={mode} className="side-group">
@@ -178,6 +189,9 @@ export function Features() {
                     onClick={() => setSelected([mode, index])}
                   >
                     {item.name}
+                    {active && autoplay && inView && (
+                      <i className="progress" onAnimationEnd={() => setSelected(tabs[(position + 1) % tabs.length])} />
+                    )}
                   </button>
                 );
               })}
@@ -193,13 +207,13 @@ export function Features() {
         onTouchStart={(event) => (touchStart.current = event.touches[0].clientX)}
         onTouchEnd={(event) => swipe(event.changedTouches[0].clientX)}
       >
-        <p>{feature.text}</p>
+        <p key={feature.name}>{feature.text}</p>
         <div className={`panel ${feature.chat.length ? "chat" : ""}`}>
           <img className="calm" src="/illustrations/phone-hand.webp" alt="" />
           {feature.chat.length ? (
             <div className="chatcard">
               {feature.chat.map((item, index) => (
-                <Bubble key={`${feature.name}-${index}`} item={item} />
+                <Bubble key={`${feature.name}-${index}`} item={item} delay={0.15 + index * 0.7} />
               ))}
             </div>
           ) : (

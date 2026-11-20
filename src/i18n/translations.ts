@@ -18,7 +18,26 @@ type HeroMessage = {
   time: string;
 };
 
+type WaChat = {
+  name: string;
+  text: string;
+  time: string;
+  unread: number;
+  group?: boolean;
+  pinned?: boolean;
+  muted?: boolean;
+  mine?: boolean;
+  sender?: string;
+  avatar?: string;
+  typing?: boolean;
+  mention?: boolean;
+  missed?: boolean;
+  media?: "voice" | "photo" | "doc" | "poll";
+};
+
 const features = (list: Feature[]) => list;
+const waChats = (list: WaChat[]) => list;
+const groupMessages = (list: { from: string; text: string; time: string; kind?: "voice" | "photo" }[]) => list;
 const heroMessages = (list: HeroMessage[]) => list;
 const alertMessages = (list: { name: string; text: string; level: number; icon: AlertIcon }[]) => list;
 
@@ -32,6 +51,7 @@ const en = {
     contact: "Contact",
     cta: "Message Ecqqo",
     language: "Language",
+    menu: "Menu",
   },
   hero: {
     title: { before: "Never leave an important WhatsApp message ", highlight: "on read", after: "." },
@@ -161,7 +181,91 @@ const en = {
   showcase: {
     title: "Your day on one screen.",
     subtitle: "Shared with your assistant.",
-    alt: "The Ecqqo command center",
+    app: {
+      initials: "KA",
+      greeting: "Good morning, Khalid",
+      date: "Thursday 12 November",
+      chats: waChats([
+        { name: "Family", text: "0:42", time: "9:10", unread: 24, group: true, pinned: true, sender: "Mum", media: "voice", avatar: "family" },
+        { name: "Omar Haddad", text: "Can we confirm Thursday's call? I need to lock the term sheet.", time: "9:12", unread: 3, avatar: "omar" },
+        { name: "Marina Heights Residents", text: "Water will be off from 10 to 2 tomorrow.", time: "9:11", unread: 87, group: true, muted: true, sender: "~ Yousef", avatar: "tower" },
+        { name: "Board members", text: "@Khalid cap table before Friday, please.", time: "9:08", unread: 12, group: true, mention: true, sender: "Jane", avatar: "board" },
+        { name: "Thursday Football", text: "Ali is typing…", time: "9:07", unread: 31, group: true, typing: true, avatar: "football" },
+        { name: "Legal team", text: "The NDA is ready and needs your signature.", time: "8:47", unread: 2, group: true, sender: "Hana", avatar: "legal" },
+        { name: "Ahmed Driver", text: "Missed voice call", time: "8:40", unread: 1, missed: true, avatar: "keys" },
+        { name: "School parents", text: "Sports day snacks", time: "8:31", unread: 58, group: true, muted: true, sender: "~ Aisha", media: "poll", avatar: "school" },
+        { name: "Karim", text: "Lunch sometime next week?", time: "8:30", unread: 1, avatar: "karim" },
+        { name: "Sadaf Holdings", text: "Photo", time: "8:12", unread: 4, media: "photo", avatar: "sadaf" },
+        { name: "Mum", text: "Did you eat breakfast?", time: "8:09", unread: 2, avatar: "mum" },
+        { name: "Abu Faisal", text: "1:15", time: "8:02", unread: 1, media: "voice", avatar: "falcon" },
+        { name: "Office supplies", text: "Invoice-November.pdf", time: "7:58", unread: 1, media: "doc", avatar: "office" },
+        { name: "Marina Gym", text: "Your membership renews on Monday.", time: "7:30", unread: 1, avatar: "gym" },
+        { name: "Mark Reyes", text: "Sure, let me check my calendar.", time: "Yesterday", unread: 0, mine: true, avatar: "mark" },
+      ]),
+      wa: {
+        title: "Chats",
+        search: "Ask Meta AI or Search",
+        filters: ["All", "Unread 14", "Favorites", "Groups"],
+        tabs: ["Updates", "Calls", "Communities", "Chats", "Settings"],
+        sidebar: ["Chats", "Updates", "Calls", "Media"],
+        more: ["Archived", "Starred"],
+        you: "You",
+        today: "Today",
+        group: {
+          name: "Family",
+          members: "Mum, Dad, Sara, Yousef, You",
+          messages: groupMessages([
+            { from: "Mum", text: "Who's picking up Sara today?", time: "8:52" },
+            { from: "Yousef", text: "Not me, practice until 5", time: "8:53" },
+            { from: "Dad", text: "", time: "8:58", kind: "photo" },
+            { from: "Sara", text: "Can someone bring my sports kit?? 🙏🙏", time: "9:02" },
+            { from: "Yousef", text: "😂😂😂", time: "9:04" },
+            { from: "Mum", text: "0:42", time: "9:10", kind: "voice" },
+          ]),
+        },
+        compare: "Compare",
+        before: "Without Ecqqo",
+        after: "With Ecqqo",
+      },
+      today: {
+        nav: ["Today", "Activity", "Routines", "Alerts", "Reminders", "Tasks", "Settings"],
+        tabs: ["Today", "Activity", "Tasks", "Alerts", "More"],
+        brief: {
+          title: "Latest from your routines",
+          time: "Today · 07:30",
+          intro: "Good morning. Two things need you today:",
+          points: ["Confirm Thursday's call with Omar.", "Sign the NDA from Legal."],
+          outro: "Everything else is handled.",
+          link: "All routine updates",
+        },
+        tasks: {
+          title: "Tasks",
+          all: "All tasks",
+          group: "Due today",
+          items: [
+            { title: "Sign the NDA", meta: "Due today · Not started" },
+            { title: "Book Thursday's call with Omar", meta: "Due today · Lina is on it" },
+          ],
+        },
+        alerts: {
+          title: "Alerts",
+          meta: "Flagged by Ecqqo",
+          items: [
+            { initials: "OH", text: "Omar Haddad wants to confirm Thursday's call.", from: "Omar Haddad · 09:12" },
+            { initials: "JC", text: "Jane Chen needs the cap table before Friday.", from: "Jane Chen · 09:08" },
+          ],
+        },
+        saved: { title: "Time saved", meta: "Last 14 days", hours: "6", minutes: "12" },
+        reminders: {
+          title: "Reminders",
+          all: "All",
+          items: [
+            { text: "Call Omar back.", time: "Today · 16:00" },
+            { text: "Review the Q3 hiring plan.", time: "Mon 16 Nov · 09:00" },
+          ],
+        },
+      },
+    },
   },
   privacy: {
     title: "Your messages stay yours.",
@@ -253,6 +357,10 @@ const en = {
     failed: "Something went wrong. Please try again in a minute.",
   },
   footer: {
+    tagline: "Your AI executive assistant in WhatsApp.",
+    product: "Product",
+    company: "Company",
+    legal: "Legal",
     privacy: "Privacy Policy",
     terms: "Terms of Service",
     dataDeletion: "Data Deletion",
@@ -271,6 +379,7 @@ const ar: typeof en = {
     contact: "تواصل معنا",
     cta: "راسل ايكو",
     language: "اللغة",
+    menu: "القائمة",
   },
   hero: {
     title: { before: "لا تترك رسالة واتساب مهمة ", highlight: "دون رد", after: "." },
@@ -400,7 +509,91 @@ const ar: typeof en = {
   showcase: {
     title: "يومك في شاشة واحدة.",
     subtitle: "تتشاركه مع مساعدك.",
-    alt: "مركز التحكم في ايكو",
+    app: {
+      initials: "خ",
+      greeting: "صباح الخير يا خالد",
+      date: "الخميس 12 نوفمبر",
+      chats: waChats([
+        { name: "العائلة", text: "0:42", time: "9:10", unread: 24, group: true, pinned: true, sender: "أمي", media: "voice", avatar: "family" },
+        { name: "عمر حداد", text: "هل نؤكد مكالمة الخميس؟ أحتاج إلى إنهاء ورقة الشروط.", time: "9:12", unread: 3, avatar: "omar" },
+        { name: "سكان مارينا هايتس", text: "ستنقطع المياه غداً من 10 إلى 2.", time: "9:11", unread: 87, group: true, muted: true, sender: "~ يوسف", avatar: "tower" },
+        { name: "أعضاء مجلس الإدارة", text: "@خالد جدول الملكية قبل الجمعة من فضلك.", time: "9:08", unread: 12, group: true, mention: true, sender: "جين", avatar: "board" },
+        { name: "كرة الخميس", text: "علي يكتب…", time: "9:07", unread: 31, group: true, typing: true, avatar: "football" },
+        { name: "الفريق القانوني", text: "اتفاقية السرية جاهزة وتحتاج إلى توقيعك.", time: "8:47", unread: 2, group: true, sender: "هناء", avatar: "legal" },
+        { name: "أحمد السائق", text: "مكالمة صوتية فائتة", time: "8:40", unread: 1, missed: true, avatar: "keys" },
+        { name: "أولياء أمور المدرسة", text: "وجبات اليوم الرياضي", time: "8:31", unread: 58, group: true, muted: true, sender: "~ عائشة", media: "poll", avatar: "school" },
+        { name: "كريم", text: "غداء الأسبوع المقبل؟", time: "8:30", unread: 1, avatar: "karim" },
+        { name: "صدف القابضة", text: "صورة", time: "8:12", unread: 4, media: "photo", avatar: "sadaf" },
+        { name: "أمي", text: "هل تناولت الفطور؟", time: "8:09", unread: 2, avatar: "mum" },
+        { name: "أبو فيصل", text: "1:15", time: "8:02", unread: 1, media: "voice", avatar: "falcon" },
+        { name: "مستلزمات المكتب", text: "Invoice-November.pdf", time: "7:58", unread: 1, media: "doc", avatar: "office" },
+        { name: "نادي المارينا", text: "يتجدد اشتراكك يوم الإثنين.", time: "7:30", unread: 1, avatar: "gym" },
+        { name: "مارك رييس", text: "أكيد، سأراجع تقويمي.", time: "أمس", unread: 0, mine: true, avatar: "mark" },
+      ]),
+      wa: {
+        title: "الدردشات",
+        search: "اسأل Meta AI أو ابحث",
+        filters: ["الكل", "غير المقروءة 14", "المفضلة", "المجموعات"],
+        tabs: ["المستجدات", "المكالمات", "المجتمعات", "الدردشات", "الإعدادات"],
+        sidebar: ["الدردشات", "المستجدات", "المكالمات", "الوسائط"],
+        more: ["المؤرشفة", "المميزة بنجمة"],
+        you: "أنت",
+        today: "اليوم",
+        group: {
+          name: "العائلة",
+          members: "أمي، أبي، سارة، يوسف، أنت",
+          messages: groupMessages([
+            { from: "أمي", text: "من سيأخذ سارة اليوم؟", time: "8:52" },
+            { from: "يوسف", text: "ليس أنا، عندي تمرين حتى 5", time: "8:53" },
+            { from: "أبي", text: "", time: "8:58", kind: "photo" },
+            { from: "سارة", text: "ممكن أحد يجيب ملابس الرياضة؟؟ 🙏🙏", time: "9:02" },
+            { from: "يوسف", text: "😂😂😂", time: "9:04" },
+            { from: "أمي", text: "0:42", time: "9:10", kind: "voice" },
+          ]),
+        },
+        compare: "قارن",
+        before: "بدون ايكو",
+        after: "مع ايكو",
+      },
+      today: {
+        nav: ["اليوم", "النشاط", "الروتين", "التنبيهات", "التذكيرات", "المهام", "الإعدادات"],
+        tabs: ["اليوم", "النشاط", "المهام", "التنبيهات", "المزيد"],
+        brief: {
+          title: "آخر تقارير الروتين",
+          time: "اليوم · 07:30",
+          intro: "صباح الخير. أمران يحتاجانك اليوم:",
+          points: ["تأكيد مكالمة الخميس مع عمر.", "توقيع اتفاقية السرية من الفريق القانوني."],
+          outro: "كل ما عدا ذلك تمت معالجته.",
+          link: "كل تقارير الروتين",
+        },
+        tasks: {
+          title: "المهام",
+          all: "كل المهام",
+          group: "مستحقة اليوم",
+          items: [
+            { title: "توقيع اتفاقية السرية", meta: "مستحقة اليوم · لم تبدأ" },
+            { title: "حجز مكالمة الخميس مع عمر", meta: "مستحقة اليوم · لينا تتابعها" },
+          ],
+        },
+        alerts: {
+          title: "التنبيهات",
+          meta: "رصدها ايكو",
+          items: [
+            { initials: "ع", text: "عمر حداد يريد تأكيد مكالمة الخميس.", from: "عمر حداد · 09:12" },
+            { initials: "ج", text: "جين تشين تحتاج جدول الملكية قبل الجمعة.", from: "جين تشين · 09:08" },
+          ],
+        },
+        saved: { title: "الوقت الموفَّر", meta: "آخر 14 يوماً", hours: "6", minutes: "12" },
+        reminders: {
+          title: "التذكيرات",
+          all: "الكل",
+          items: [
+            { text: "معاودة الاتصال بعمر.", time: "اليوم · 16:00" },
+            { text: "مراجعة خطة التوظيف للربع الثالث.", time: "الإثنين 16 نوفمبر · 09:00" },
+          ],
+        },
+      },
+    },
   },
   privacy: {
     title: "رسائلك تبقى لك.",
@@ -492,6 +685,10 @@ const ar: typeof en = {
     failed: "حدث خطأ ما. يرجى المحاولة مرة أخرى بعد دقيقة.",
   },
   footer: {
+    tagline: "مساعدك التنفيذي الذكي في واتساب.",
+    product: "المنتج",
+    company: "الشركة",
+    legal: "قانوني",
     privacy: "سياسة الخصوصية",
     terms: "شروط الخدمة",
     dataDeletion: "حذف البيانات",

@@ -11,7 +11,7 @@ export function Calculator() {
   const value = hoursBack * rate;
 
   return (
-    <div className="calc">
+    <div className="calc" data-reveal>
       <div className="calc-top">
         <label htmlFor="rate">{t.calculator.rate}</label>
         <output htmlFor="rate">

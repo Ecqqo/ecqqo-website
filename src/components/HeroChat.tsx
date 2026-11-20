@@ -60,22 +60,7 @@ export function HeroChat() {
   return (
     <div className="wa" ref={phone} aria-hidden="true">
       <div className="wa-screen">
-        <div className="wa-status" dir="ltr">
-          <span>9:41</span>
-          <span className="wa-signal">
-            <svg width="18" height="11" viewBox="0 0 18 11" fill="currentColor">
-              <rect x="0" y="7" width="3" height="4" rx="1" />
-              <rect x="5" y="5" width="3" height="6" rx="1" />
-              <rect x="10" y="2.5" width="3" height="8.5" rx="1" />
-              <rect x="15" y="0" width="3" height="11" rx="1" />
-            </svg>
-            <svg width="25" height="12" viewBox="0 0 25 12">
-              <rect x=".5" y=".5" width="21" height="11" rx="3.5" fill="none" stroke="currentColor" opacity=".4" />
-              <rect x="2" y="2" width="15" height="8" rx="2" fill="currentColor" />
-              <path d="M23 4v4c.8-.3 1.3-1 1.3-2s-.5-1.7-1.3-2Z" fill="currentColor" opacity=".4" />
-            </svg>
-          </span>
-        </div>
+        <StatusBar />
         <div className="wa-head">
           <svg className="wa-back" width="12" height="20" viewBox="0 0 12 20">
             <path d="M10 2 2 10l8 8" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -144,6 +129,27 @@ export function HeroChat() {
           <Mic />
         </div>
       </div>
+    </div>
+  );
+}
+
+export function StatusBar() {
+  return (
+    <div className="wa-status" dir="ltr">
+      <span>9:41</span>
+      <span className="wa-signal">
+        <svg width="18" height="11" viewBox="0 0 18 11" fill="currentColor">
+          <rect x="0" y="7" width="3" height="4" rx="1" />
+          <rect x="5" y="5" width="3" height="6" rx="1" />
+          <rect x="10" y="2.5" width="3" height="8.5" rx="1" />
+          <rect x="15" y="0" width="3" height="11" rx="1" />
+        </svg>
+        <svg width="25" height="12" viewBox="0 0 25 12">
+          <rect x=".5" y=".5" width="21" height="11" rx="3.5" fill="none" stroke="currentColor" opacity=".4" />
+          <rect x="2" y="2" width="15" height="8" rx="2" fill="currentColor" />
+          <path d="M23 4v4c.8-.3 1.3-1 1.3-2s-.5-1.7-1.3-2Z" fill="currentColor" opacity=".4" />
+        </svg>
+      </span>
     </div>
   );
 }
